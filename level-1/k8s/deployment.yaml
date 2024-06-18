@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sum-deployment
+  labels:
+    app: sum
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sum
+  template:
+    metadata:
+      labels:
+        app: sum
+    spec:
+      containers:
+        - name: sum
+          image: leeminjae/sum-api
+          ports:
+            - containerPort: 8080
