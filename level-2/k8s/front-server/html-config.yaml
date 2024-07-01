@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: html-config
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Frontend</title>
+      <script>
+        function sendText() {
+          var text = document.getElementById("inputText").value;
+          var url = 'http://localhost:5000/api/hi';
+          fetch(url, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            document.getElementById("output").innerText = 'Server says: ' + data.message;
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            document.getElementById("output").innerText = 'Error: ' + error;
+          });
+        }
+      </script>
+    </head>
+    <body>
+      <h1>Frontend</h1>
+      <input type="text" id="inputText" />
+      <button onclick="sendText()">Send</button>
+      <div id="output"></div>
+    </body>
+    </html>
