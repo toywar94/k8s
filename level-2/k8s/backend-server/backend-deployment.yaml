@@ -5,7 +5,7 @@ metadata:
   labels:
     app: backend-server
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: backend-server
@@ -19,3 +19,15 @@ spec:
           image: leeminjae/hi-api:latest
           ports:
             - containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: health-check
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: health-check
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 2

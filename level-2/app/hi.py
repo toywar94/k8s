@@ -16,6 +16,10 @@ app.add_middleware(
 def return_hi():
     return {"message": "Hi"}
 
+@app.get("/health-check")
+def health_check():
+    return {"code": "200"}
+
 
 if __name__ == "__main__":
     import uvicorn
